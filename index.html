@@ -1,0 +1,79 @@
+<html ng-app="myApp">
+		<head>
+			<title>First Angular</title>
+			<script type="text/javascript" src="lib/angular.min.js"></script>
+		</head>
+		<body>
+			<h2>{{'Angular'+'World'}}</h2>
+			
+				<h3>Http Call</h3>
+				<script type="text/javascript">
+				var myApp = angular.module('myApp', []);
+				var response_object;
+
+				function weather_params(datetext,rain_mm){
+					this.datetext = datetext;
+					this.rain_mm = rain_mm;
+				}
+
+				var weather_obj;
+				var weather_date;
+				var params = new Array();
+				var weather_date_copy = 0;
+				var weather_op;
+				var rainValue_copy = 0;
+				var count = 0;
+
+				params.push("Hi");
+
+				myApp.controller('firstcontroller', function($scope,$http){
+					$scope.names=['Alandur','Adambakkam','Adyar'];
+					$scope.weather=[];
+
+					$http.get("http://api.openweathermap.org/data/2.5/forecast?q=Chennai,in&appid=675e5e6e9c946570da621fea8c308d12").then(function(response){
+							$scope.opdata = response.data;
+							response_object = $scope.opdata.list;
+
+							angular.forEach(response_object, function(value, key){
+								var raininmm_obj = value.rain;
+								weather_date = new Date(value.dt_txt.toString());
+
+								if(raininmm_obj.hasOwnProperty('3h')){
+									angular.forEach(raininmm_obj, function(rainvalue, rainkey){
+
+										weather_obj = new weather_params(weather_date.getDate(),rainvalue);
+										if(weather_date_copy !=0){
+											//console.log(weather_date_copy);
+											if(weather_date_copy == weather_date.getDate()){
+												weather_op = weather_date.getDate();
+												rainValue_copy = rainValue_copy + rainvalue;
+												count++;
+												//console.log(rainValue_copy+" "+weather_op);
+												console.log(weather_op+" "+count);
+											}
+										}
+										rainValue_copy = rainvalue;
+										weather_date_copy = weather_date.getDate();
+										$scope.weather.push(weather_obj);
+
+									});
+									
+								}
+
+
+							});
+							
+						});	
+				});
+				//console.log(params.length+"");
+
+				</script>
+				<div class="HttpCall" ng-controller="firstcontroller">
+					<ul>
+						<li ng-repeat="x in weather">
+							{{x.datetext + "-"+x.rain_mm}}
+						</li>
+					</ul>
+			</div>
+		</body>
+</html>

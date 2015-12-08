@@ -1,0 +1,275 @@
+{
+	"auto_complete":
+	{
+		"selected_items":
+		[
+			[
+				"h",
+				"h2	Tag"
+			],
+			[
+				"border",
+				"border-spacing"
+			],
+			[
+				"font",
+				"font-size"
+			],
+			[
+				"cell",
+				"cellspacing	Attr"
+			],
+			[
+				"te",
+				"text-align"
+			],
+			[
+				"im",
+				"background-image"
+			],
+			[
+				"tex",
+				"text-decoration"
+			],
+			[
+				"wid",
+				"width"
+			],
+			[
+				"ba",
+				"background-color"
+			],
+			[
+				"bg",
+				"background-color"
+			],
+			[
+				"fact",
+				"factorial"
+			],
+			[
+				"P",
+				"port"
+			]
+		]
+	},
+	"buffers":
+	[
+		{
+			"file": "index.html",
+			"settings":
+			{
+				"buffer_size": 194,
+				"line_ending": "Windows",
+				"name": "<html>"
+			}
+		}
+	],
+	"build_system": "",
+	"build_system_choices":
+	[
+	],
+	"build_varint": "",
+	"command_palette":
+	{
+		"height": 0.0,
+		"last_filter": "",
+		"selected_items":
+		[
+		],
+		"width": 0.0
+	},
+	"console":
+	{
+		"height": 0.0,
+		"history":
+		[
+		]
+	},
+	"distraction_free":
+	{
+		"menu_visible": true,
+		"show_minimap": false,
+		"show_open_files": false,
+		"show_tabs": false,
+		"side_bar_visible": false,
+		"status_bar_visible": false
+	},
+	"file_history":
+	[
+		"/C/Users/kalaiyappan/AppData/Roaming/Sublime Text 3/Packages/User/Preferences.sublime-settings",
+		"/C/Ruby Learning/Pgm Codes/MyFirstRuby.rb",
+		"/C/Ruby Learning/Pgm Codes/MySecondRuby.rb",
+		"/C/Ruby Learning/Pgm Codes/ThirdRuby.rb",
+		"/C/Users/kalaiyappan/Documents/Mail Template/chettinadSnacks.html",
+		"/C/Users/kalaiyappan/Documents/Mail Template/TableChettinadSnacks",
+		"/F/Ruby Learning/Pgm Codes/MyFirstRuby.rb",
+		"/C/Users/kalaiyappan/chef-repo/cookbooks/apache/recipes/vhosts.rb",
+		"/C/Users/kalaiyappan/chef-repo/cookbooks/apache/templates/default/index.html.erb",
+		"/C/Users/kalaiyappan/chef-repo/cookbooks/apache/metadata.rb",
+		"/C/Users/kalaiyappan/chef-repo/cookbooks/apache/kalainew@gmail.com",
+		"/C/Users/kalaiyappan/chef-repo/roles/webserver.json",
+		"/C/Users/kalaiyappan/chef-repo/cookbooks/apache/attributes/default.rb",
+		"/C/Users/kalaiyappan/chef-repo/cookbooks/apache/templates/default/custom-vhosts.erb",
+		"/C/Users/kalaiyappan/chef-repo/cookbooks/apache/recipes/default.rb",
+		"/C/Users/kalaiyappan/chef-repo/roles/starter.rb",
+		"/C/Users/kalaiyappan/chef-repo/data_bags/vhosts/clowns.json",
+		"/C/Users/kalaiyappan/chef-repo/data_bags/vhosts/bears.json",
+		"/C/Users/kalaiyappan/chef-repo/hello.rb",
+		"/C/Users/kalaiyappan/AppData/Roaming/Sublime Text 3/Packages/Default/Preferences.sublime-settings",
+		"/F/chef-repo/.chef/knife.rb"
+	],
+	"find":
+	{
+		"height": 23.0
+	},
+	"find_in_files":
+	{
+		"height": 0.0,
+		"where_history":
+		[
+		]
+	},
+	"find_state":
+	{
+		"case_sensitive": false,
+		"find_history":
+		[
+			"}\n",
+			";\n",
+			"		\n"
+		],
+		"highlight": false,
+		"in_selection": false,
+		"preserve_case": false,
+		"regex": false,
+		"replace_history":
+		[
+		],
+		"reverse": false,
+		"show_context": true,
+		"use_buffer2": true,
+		"whole_word": false,
+		"wrap": true
+	},
+	"groups":
+	[
+		{
+			"selected": 0,
+			"sheets":
+			[
+				{
+					"buffer": 0,
+					"file": "index.html",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 194,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								25,
+								25
+							]
+						],
+						"settings":
+						{
+							"auto_name": "<html>",
+							"syntax": "Packages/HTML/HTML.tmLanguage"
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 0,
+					"type": "text"
+				}
+			]
+		}
+	],
+	"incremental_find":
+	{
+		"height": 23.0
+	},
+	"input":
+	{
+		"height": 31.0
+	},
+	"layout":
+	{
+		"cells":
+		[
+			[
+				0,
+				0,
+				1,
+				1
+			]
+		],
+		"cols":
+		[
+			0.0,
+			1.0
+		],
+		"rows":
+		[
+			0.0,
+			1.0
+		]
+	},
+	"menu_visible": true,
+	"output.find_results":
+	{
+		"height": 0.0
+	},
+	"pinned_build_system": "",
+	"project": "First.sublime-project",
+	"replace":
+	{
+		"height": 42.0
+	},
+	"save_all_on_build": true,
+	"select_file":
+	{
+		"height": 0.0,
+		"last_filter": "",
+		"selected_items":
+		[
+		],
+		"width": 0.0
+	},
+	"select_project":
+	{
+		"height": 0.0,
+		"last_filter": "",
+		"selected_items":
+		[
+		],
+		"width": 0.0
+	},
+	"select_symbol":
+	{
+		"height": 0.0,
+		"last_filter": "",
+		"selected_items":
+		[
+		],
+		"width": 0.0
+	},
+	"selected_group": 0,
+	"settings":
+	{
+	},
+	"show_minimap": true,
+	"show_open_files": true,
+	"show_tabs": true,
+	"side_bar_visible": true,
+	"side_bar_width": 189.0,
+	"status_bar_visible": true,
+	"template_settings":
+	{
+	}
+}
