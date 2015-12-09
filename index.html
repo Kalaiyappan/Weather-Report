@@ -21,9 +21,6 @@
 				var weather_date_copy = 0;
 				var weather_op;
 				var rainValue_copy = 0;
-				var rainValue_op=0;
-				var count = 0;
-				var fn_weather_oj;
 
 				myApp.controller('firstcontroller', function($scope,$http){
 					$scope.names=['Alandur','Adambakkam','Adyar'];
@@ -36,7 +33,10 @@
 							angular.forEach(response_object, function(value, key){
 								var raininmm_obj = value.rain;
 								weather_date = new Date(value.dt_txt.toString());
-								weather_date = weather_date.getDate();
+								var month = weather_date.getMonth()+1;
+								weather_date = weather_date.getDate()+"-"+month+"-"+weather_date.getFullYear();
+								var city_obj = value.city;
+								//console.log(city_obj);
 								if(raininmm_obj.hasOwnProperty('3h')){
 									angular.forEach(raininmm_obj, function(rainvalue, rainkey){
 
@@ -46,13 +46,12 @@
 											if(weather_date_copy == weather_date){
 												weather_op = weather_date;
 												rainValue_copy = rainValue_copy + rainvalue;
-												count++;
 												//console.log(rainValue_copy+" "+weather_op);
-												//console.log(weather_op+" "+count);
 											}else {
 												//weather_op  to be set in Weather_OBJ
-												console.log("OutPut after calculation, Total Rain Value: "+rainValue_copy+" , The day: "+weather_op);
+												//console.log("OutPut after calculation, Total Rain Value: "+rainValue_copy+" , The day: "+weather_op);
 												weather_obj = new weather_params(weather_op,rainValue_copy.toFixed(2));
+												rainValue_copy = rainvalue;
 												$scope.weather.push(weather_obj);
 												//$scope.weather.push(weather_obj); - Should be done here;
 											}
@@ -72,6 +71,7 @@
 							
 						});	
 				});
+
 
 				</script>
 				<div class="HttpCall" ng-controller="firstcontroller">
