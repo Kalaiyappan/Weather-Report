@@ -18,13 +18,12 @@
 
 				var weather_obj;
 				var weather_date;
-				var params = new Array();
 				var weather_date_copy = 0;
 				var weather_op;
 				var rainValue_copy = 0;
+				var rainValue_op=0;
 				var count = 0;
-
-				params.push("Hi");
+				var fn_weather_oj;
 
 				myApp.controller('firstcontroller', function($scope,$http){
 					$scope.names=['Alandur','Adambakkam','Adyar'];
@@ -37,24 +36,32 @@
 							angular.forEach(response_object, function(value, key){
 								var raininmm_obj = value.rain;
 								weather_date = new Date(value.dt_txt.toString());
-
+								weather_date = weather_date.getDate();
 								if(raininmm_obj.hasOwnProperty('3h')){
 									angular.forEach(raininmm_obj, function(rainvalue, rainkey){
 
-										weather_obj = new weather_params(weather_date.getDate(),rainvalue);
+										//weather_obj = new weather_params(weather_date,rainvalue); -- Original Data with complete 3 days report for Chennai
 										if(weather_date_copy !=0){
 											//console.log(weather_date_copy);
-											if(weather_date_copy == weather_date.getDate()){
-												weather_op = weather_date.getDate();
+											if(weather_date_copy == weather_date){
+												weather_op = weather_date;
 												rainValue_copy = rainValue_copy + rainvalue;
 												count++;
 												//console.log(rainValue_copy+" "+weather_op);
-												console.log(weather_op+" "+count);
+												//console.log(weather_op+" "+count);
+											}else {
+												//weather_op  to be set in Weather_OBJ
+												console.log("OutPut after calculation, Total Rain Value: "+rainValue_copy+" , The day: "+weather_op);
+												weather_obj = new weather_params(weather_op,rainValue_copy.toFixed(2));
+												$scope.weather.push(weather_obj);
+												//$scope.weather.push(weather_obj); - Should be done here;
 											}
-										}
+										}else{
 										rainValue_copy = rainvalue;
-										weather_date_copy = weather_date.getDate();
-										$scope.weather.push(weather_obj);
+										}
+										
+										weather_date_copy = weather_date;
+										
 
 									});
 									
@@ -65,7 +72,6 @@
 							
 						});	
 				});
-				//console.log(params.length+"");
 
 				</script>
 				<div class="HttpCall" ng-controller="firstcontroller">
