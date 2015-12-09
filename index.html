@@ -28,44 +28,47 @@
 
 					$http.get("http://api.openweathermap.org/data/2.5/forecast?q=Chennai,in&appid=675e5e6e9c946570da621fea8c308d12").then(function(response){
 							$scope.opdata = response.data;
-							response_object = $scope.opdata.list;
 
-							angular.forEach(response_object, function(value, key){
-								var raininmm_obj = value.rain;
-								weather_date = new Date(value.dt_txt.toString());
-								var month = weather_date.getMonth()+1;
-								weather_date = weather_date.getDate()+"-"+month+"-"+weather_date.getFullYear();
-								var city_obj = value.city;
-								//console.log(city_obj);
-								if(raininmm_obj.hasOwnProperty('3h')){
-									angular.forEach(raininmm_obj, function(rainvalue, rainkey){
+							angular.forEach($scope.opdata, function(response_value, response_key){
+								if(Array.isArray(response_value)){
+									angular.forEach(response_value,function(value,key){
+										var raininmm_obj = value.rain;
+										//console.log(raininmm_obj);
+										weather_date = new Date(value.dt_txt.toString());
+										var month = weather_date.getMonth()+1;
+										weather_date = weather_date.getDate()+"-"+month+"-"+weather_date.getFullYear();
+										//var city_obj = value.city;
+										//console.log(city_obj);
+										if(raininmm_obj.hasOwnProperty('3h')){
+											angular.forEach(raininmm_obj, function(rainvalue, rainkey){
 
-										//weather_obj = new weather_params(weather_date,rainvalue); -- Original Data with complete 3 days report for Chennai
-										if(weather_date_copy !=0){
-											//console.log(weather_date_copy);
-											if(weather_date_copy == weather_date){
-												weather_op = weather_date;
-												rainValue_copy = rainValue_copy + rainvalue;
-												//console.log(rainValue_copy+" "+weather_op);
-											}else {
-												//weather_op  to be set in Weather_OBJ
-												//console.log("OutPut after calculation, Total Rain Value: "+rainValue_copy+" , The day: "+weather_op);
-												weather_obj = new weather_params(weather_op,rainValue_copy.toFixed(2));
+												//weather_obj = new weather_params(weather_date,rainvalue); -- Original Data with complete 3 days report for Chennai
+												if(weather_date_copy !=0){
+													//console.log(weather_date_copy);
+													if(weather_date_copy == weather_date){
+														weather_op = weather_date;
+														rainValue_copy = rainValue_copy + rainvalue;
+														//console.log(rainValue_copy+" "+weather_op);
+													}else {
+														//weather_op  to be set in Weather_OBJ
+														//console.log("OutPut after calculation, Total Rain Value: "+rainValue_copy+" , The day: "+weather_op);
+														weather_obj = new weather_params(weather_op,rainValue_copy.toFixed(2));
+														rainValue_copy = rainvalue;
+														$scope.weather.push(weather_obj);
+														//$scope.weather.push(weather_obj); - Should be done here;
+													}
+												}else{
 												rainValue_copy = rainvalue;
-												$scope.weather.push(weather_obj);
-												//$scope.weather.push(weather_obj); - Should be done here;
-											}
-										}else{
-										rainValue_copy = rainvalue;
+												}
+												
+												weather_date_copy = weather_date;
+												
+
+											});
+											
 										}
-										
-										weather_date_copy = weather_date;
-										
-
 									});
-									
 								}
-
 
 							});
 							
