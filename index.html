@@ -11,9 +11,10 @@
 				var myApp = angular.module('myApp', []);
 				var response_object;
 
-				function weather_params(datetext,rain_mm){
+				function weather_params(datetext,rain_mm,place_name){
 					this.datetext = datetext;
 					this.rain_mm = rain_mm;
+					this.place_name = place_name;
 				}
 
 				var weather_obj;
@@ -21,15 +22,65 @@
 				var weather_date_copy = 0;
 				var weather_op;
 				var rainValue_copy = 0;
+				var place_name="";
+				var rain_data;
+				var date_data;
+				var http_url_part1="http://api.openweathermap.org/data/2.5/forecast/daily?q=";
+				var http_url_part2="&units=metric&cnt=7&appid=675e5e6e9c946570da621fea8c308d12";
 
 				myApp.controller('firstcontroller', function($scope,$http){
 					$scope.names=['Alandur','Adambakkam','Adyar'];
+					
+					$http.get('file://D:/Weather-Report/Weather-Report-master/data/city.json').success(function(response){
+						console.log(response);
+					});
+					//$scope.names=['Chennai'];
 					$scope.weather=[];
+					$scope.weather_places = [];
 
-					$http.get("http://api.openweathermap.org/data/2.5/forecast?q=Chennai,in&appid=675e5e6e9c946570da621fea8c308d12").then(function(response){
+					angular.forEach($scope.names,function(name_value,name_key){
+					$http.get(http_url_part1+name_value+http_url_part2).then(function(response){
 							$scope.opdata = response.data;
+							//console.log($scope.opdata);
+							
+							angular.forEach($scope.opdata,function(response_value,response_key){
+								if(response_value.hasOwnProperty("name")){
+									if(place_name != response_value.name){
+										place_name = response_value.name;
+										$scope.weather_places.push(place_name);
+									}
+								}
+								if(Array.isArray(response_value)){
+									angular.forEach(response_value,function(array_value,array_key){
+										if(array_value.hasOwnProperty("rain")){
+											rain_data = array_value.rain;
+											
+										}else{
+											rain_data = "No Rain";
+										}
+										if(array_value.hasOwnProperty("dt")){
+											var date = new Date(array_value.dt*1000);
+											date_data = date.getUTCDate()+"-"+(date.getMonth()+1)+"-"+date.getFullYear();
+											//console.log(date.toString());
+											weather_obj = new weather_params(date_data,rain_data,place_name);
+											$scope.weather.push(weather_obj);
+											
+											//console.log($scope.weather_places);
+										}
+									});
+								}
+							});
+							
+							$scope.checkstatus = function(var1,var2){
+								if(var1 == var2){
+								alert(var1+" true "+var2);
+									return true;
+								}
+								
+								return false;
+							}
 
-							angular.forEach($scope.opdata, function(response_value, response_key){
+							/*angular.forEach($scope.opdata, function(response_value, response_key){
 								if(Array.isArray(response_value)){
 									angular.forEach(response_value,function(value,key){
 										var raininmm_obj = value.rain;
@@ -40,9 +91,11 @@
 										//var city_obj = value.city;
 										//console.log(city_obj);
 										if(raininmm_obj.hasOwnProperty('3h')){
+											//console.log(raininmm_obj);
 											angular.forEach(raininmm_obj, function(rainvalue, rainkey){
 
 												//weather_obj = new weather_params(weather_date,rainvalue); -- Original Data with complete 3 days report for Chennai
+												console.log(rainvalue+" , "+ weather_date);
 												if(weather_date_copy !=0){
 													//console.log(weather_date_copy);
 													if(weather_date_copy == weather_date){
@@ -51,11 +104,16 @@
 														//console.log(rainValue_copy+" "+weather_op);
 													}else {
 														//weather_op  to be set in Weather_OBJ
-														//console.log("OutPut after calculation, Total Rain Value: "+rainValue_copy+" , The day: "+weather_op);
+														console.log("OutPut after calculation, Total Rain Value: "+rainValue_copy+" , The day: "+weather_op+"Current Weather Value: "+weather_date);
 														weather_obj = new weather_params(weather_op,rainValue_copy.toFixed(2));
-														rainValue_copy = rainvalue;
 														$scope.weather.push(weather_obj);
-														//$scope.weather.push(weather_obj); - Should be done here;
+														if(weather_op != weather_date){
+															weather_op = weather_date;
+															rainValue_copy = rainvalue;
+															weather_obj = new weather_params(weather_op,rainValue_copy.toFixed(2));
+															$scope.weather.push(weather_obj);
+														}
+														
 													}
 												}else{
 												rainValue_copy = rainvalue;
@@ -70,19 +128,23 @@
 									});
 								}
 
-							});
+							}); -- Code for 3h hourly Weather Updates API */
 							
 						});	
+					});
 				});
 
 
 				</script>
 				<div class="HttpCall" ng-controller="firstcontroller">
-					<ul>
-						<li ng-repeat="x in weather">
-							{{x.datetext + "-"+x.rain_mm}}
-						</li>
-					</ul>
-			</div>
+						<div class = "places" ng-repeat="j in weather_places">
+						{{j}}
+							<li ng-repeat="x in weather" ng-if="j==x.place_name">
+										{{x.datetext + "-"+x.rain_mm+" - "+x.place_name+" - "+j}}
+							</li>
+						</div>
+						
+						
+				</div>
 		</body>
 </html>
