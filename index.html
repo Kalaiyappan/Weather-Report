@@ -1,13 +1,13 @@
 <html ng-app="myApp">
 		<head>
 			<title>First Angular</title>
-			<script type="text/javascript" src="lib/angular.min.js"></script>
+			<script type="text/javascript" src="js/angular.min.js"></script>
+			<script type="text/javascript" src="js/weather-data-calculator.js"></script>
 		</head>
 		<body>
 			<h2>{{'Angular'+'World'}}</h2>
 			
 				<h3>Http Call</h3>
-				<script type="text/javascript" src="js/weather-data-calculator.js"></script>
 				<div class="HttpCall" ng-controller="firstcontroller">
 						<div class = "places" ng-repeat="j in weather_places track by $index">
 						<header>{{j}}</header>
